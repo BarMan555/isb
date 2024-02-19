@@ -3,15 +3,34 @@ import logging
 import os
 import re
 
-ignore_list = ['\n', '.', ',', '!', '?', ' ']
+ignore_list = ['\n', '.', ',', '!', '?', ' ', '-', '_', ':', '-', '—']
+RUSSIAN = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя"
+DIGITAL = "0123456789"
 
 def encryption(text : str, key : dict) -> str:
+    # Создаем таблицу регистров для коректного выходного
+    registerTable = list()
+    for letter in text:
+        if (letter not in RUSSIAN) and (letter not in DIGITAL): continue
+        if letter.isupper():
+            registerTable.append(True)
+        else:
+            registerTable.append(False)
+        
+    # Создаем новую строчку с закодированным текстом
+    # учитывая регистор с помощью таблицы регистров
+    i = 0
     resultText = ""
     for letter in text.upper():
-        if letter in ignore_list:
+        if (letter not in RUSSIAN) and (letter not in DIGITAL):
             resultText += letter
             continue
-        resultText += key[letter]
+
+        resultKey = key[letter]
+        if registerTable[i]: resultText += resultKey
+        else:                resultText += resultKey.lower()
+        i += 1
+    
     return resultText
 
 def read_file(path_original : str) -> str:
