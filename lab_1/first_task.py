@@ -3,6 +3,7 @@ import logging
 import os
 import re
 
+SETTING_PATH = 'lab_1\settings.json'
 RUSSIAN = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя"
 DIGITAL = "0123456789"
 
@@ -47,10 +48,20 @@ def write_file(path : str, text : str) -> None:
         f.write(text)
 
 if __name__ == "__main__":
-    setting = json_to_dict('lab_1\settings.json')
-    text = encryption(read_file('lab_1\\first_task\\original.txt'), 
-                      json_to_dict('lab_1\\first_task\\key.json'))
-    write_file('lab_1\\first_task\\result.txt', text)
+    setting = json_to_dict(SETTING_PATH)
+    original_path = os.path.join(setting["fold_lab"], 
+                                 setting["fold_task"], 
+                                 setting["originalTxt"])
+    key_path = os.path.join(setting["fold_lab"], 
+                            setting["fold_task"], 
+                            setting["keyJson"])
+    result_path = os.path.join(setting["fold_lab"], 
+                            setting["fold_task"], 
+                            setting["resultTxt"])
+    
+    text = encryption(read_file(original_path), 
+                      json_to_dict(key_path))
+    write_file(result_path, text)
     
     
     

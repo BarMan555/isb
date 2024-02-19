@@ -1,7 +1,8 @@
 {
-    "fold" : "first_task",
+    "fold_lab" : "lab_1",
+    "fold_task" : "first_task",
 
     "originalTxt" : "original.txt",
-    "encryptedTxt" : "encrypted.txt",
+    "resultTxt" : "result.txt",
     "keyJson" : "key.json"
 }
