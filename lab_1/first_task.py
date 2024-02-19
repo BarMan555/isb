@@ -3,7 +3,6 @@ import logging
 import os
 import re
 
-ignore_list = ['\n', '.', ',', '!', '?', ' ', '-', '_', ':', '-', '—']
 RUSSIAN = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя"
 DIGITAL = "0123456789"
 
@@ -43,11 +42,15 @@ def json_to_dict(path : str) -> dict:
         key = json.load(f)
     return key
 
-if __name__ == "__main__":
-    with open('lab_1\settings.json', 'r', encoding='utf-8') as f:
-        setting = json.load(f)
+def write_file(path : str, text : str) -> None:
+    with open(path, 'w', encoding='utf-8') as f:
+        f.write(text)
 
-    print(encryption(read_file('lab_1\\first_task\\original.txt'), json_to_dict('lab_1\\first_task\\key.json')))
+if __name__ == "__main__":
+    setting = json_to_dict('lab_1\settings.json')
+    text = encryption(read_file('lab_1\\first_task\\original.txt'), 
+                      json_to_dict('lab_1\\first_task\\key.json'))
+    write_file('lab_1\\first_task\\result.txt', text)
     
     
     
