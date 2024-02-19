@@ -3,6 +3,11 @@ import logging
 import os
 import re
 
+def encryption(text : str, key : dict) -> str:
+    resultText = ""
+    for letter in text.upper():
+        resultText += key[letter]
+    return resultText
 
 def read_file(path_original : str) -> str:
     with open(path_original, 'r', encoding='utf-8') as f:
