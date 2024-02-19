@@ -1,12 +1,10 @@
-import json
 import logging
 import os
-import re
 from working_with_file import write_file, read_file, json_to_dict
 
 logging.basicConfig(level=logging.INFO)
 
-SETTING_PATH = 'lab_1\settings.json'
+SETTING_PATH = 'lab_1\settings1.json'
 RUSSIAN = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя"
 DIGITAL = "0123456789"
 
