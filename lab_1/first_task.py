@@ -10,6 +10,16 @@ RUSSIAN = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯа�
 DIGITAL = "0123456789"
 
 def encryption(text : str, key : dict) -> str:
+    """
+    Encrypts the received text using the received key. Returns the ciphertext
+
+    parameters
+    ----------
+    text : str,
+        Original text
+    key : dict,
+        Encryption key
+    """
     try:
         # Создаем таблицу регистров для коректного выходного
         registerTable = list()
@@ -39,6 +49,14 @@ def encryption(text : str, key : dict) -> str:
         logging.error(ex)
 
 def read_file(path_original : str) -> str:
+    """
+    Read file. Return text from file
+
+    parameters
+    ----------
+    path_original : str,
+        Path to file
+    """
     try:
         with open(path_original, 'r', encoding='utf-8') as f:
             text = f.read()
@@ -47,6 +65,14 @@ def read_file(path_original : str) -> str:
         logging.error(ex)
 
 def json_to_dict(path : str) -> dict:
+    """
+    Translate json file to dict. Return dict
+
+    parameters
+    ----------
+    path : str,
+        Path to JSON file
+    """
     try:
         with open(path, 'r', encoding='utf-8') as f:
             key = json.load(f)
@@ -55,6 +81,16 @@ def json_to_dict(path : str) -> dict:
         logging.error(ex)
 
 def write_file(path : str, text : str) -> None:
+    """
+    Write text to file
+
+    parameters
+    ----------
+    path : str,
+        Path to save text
+    text : str,
+        Text for saving
+    """
     try:
         with open(path, 'w', encoding='utf-8') as f:
             f.write(text)
