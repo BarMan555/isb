@@ -1,0 +1,7 @@
+{
+    "fold" : "first_task",
+
+    "originalTxt" : "original.txt",
+    "encryptedTxt" : "encrypted.txt",
+    "keyJson" : "key.json"
+}
