@@ -5,6 +5,15 @@ SETTING_PATH = "lab_1\\settings2.json"
 RIGHT_ALPHABET = " оиеантсрвмлдякпзыьучжгхфйюбцщэъ"
 
 def make_stats(text : str) -> dict:
+    """
+    Finds the frequency of occurrence of a letter in a word.
+    Return dict(letter : frequency)
+
+    parameters
+    ----------
+    text : str,
+        Text for analysis
+    """
     length = len(text)
     stats = dict()
     for letter in text:
@@ -16,11 +25,35 @@ def make_stats(text : str) -> dict:
 
 
 def dechiper(text : str, key : dict) -> str:
+    """
+    Replaces old characters with new ones in the text using a dictionary. 
+    Return new text
+
+    parameters
+    ----------
+    text : str,
+        The text in which the replacement occurs
+    key : dict,
+        Dictionary-key
+    """
     for old, new in key.items():
         letter_dechiper(text, old, new)
     return text
 
 def letter_dechiper(text : str, old : str, new : str) -> str:
+    """
+    Replace the old character with a new one in the text. 
+    Return new text
+
+    parameters
+    -----------
+    text : str,
+        The text in which the replacement occurs
+    old : str,
+        Old letter
+    New : str, 
+        New letter
+    """
     text=text.replace(old, new)
     return text
 
@@ -40,6 +73,11 @@ if __name__ == "__main__":
         setting['fold_lab'],
         setting['fold_task'],
         setting['keyJson']
+    )
+    decrypted_path = os.path.join(
+        setting['fold_lab'],
+        setting['fold_task'],
+        setting['decryptedTxt']
     )
 
     freq = make_stats(text)
@@ -82,6 +120,6 @@ if __name__ == "__main__":
     resultTxt = letter_dechiper(resultTxt, 'Ч', 'ц')
     resultTxt = letter_dechiper(resultTxt, '\n', 'ы')
 
-
-
-    write_file("lab_1\\second_task\\de.txt", resultTxt)
+    keyDict = dict(zip("МХ4У1rb<7cЕО>А2ДКЫФa5ЛtЬРП8ЙИБЧ\n", "налотгчйдсеиьпрюшмвбяущзжкхфэцы"))
+    dict_to_json(key_path, keyDict)
+    write_file(decrypted_path, resultTxt)
