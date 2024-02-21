@@ -3,5 +3,6 @@
     "fold_task" : "second_task",
 
     "cipherTxt" : "code4.txt",
-    "statsJson" : "stats.json"
+    "statsJson" : "stats.json",
+    "keyJson" : "key.json"
 }
