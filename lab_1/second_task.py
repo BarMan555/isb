@@ -1,4 +1,5 @@
 import os
+
 from working_with_file import json_to_dict, dict_to_json, read_file, write_file
 
 SETTING_PATH = "lab_1\\settings2.json"
