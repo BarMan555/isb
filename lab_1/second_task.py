@@ -37,7 +37,7 @@ def dechiper(text : str, key : dict) -> str:
         Dictionary-key
     """
     for old, new in key.items():
-        letter_dechiper(text, old, new)
+        text = letter_dechiper(text, old, new)
     return text
 
 def letter_dechiper(text : str, old : str, new : str) -> str:
@@ -86,40 +86,9 @@ if __name__ == "__main__":
     # letter_list = list(freq.keys())
     # key = dict(zip(letter_list, RIGHT_ALPHABET))
     # dict_to_json(key_path, key)
-    
-    resultTxt = letter_dechiper(text, 'М', ' ')
-    resultTxt = letter_dechiper(resultTxt, 'Х', 'н')
-    resultTxt = letter_dechiper(resultTxt, '4', 'а')
-    resultTxt = letter_dechiper(resultTxt, 'У', 'л')
-    resultTxt = letter_dechiper(resultTxt, '1', 'о')
-    resultTxt = letter_dechiper(resultTxt, 'r', 'т')
-    resultTxt = letter_dechiper(resultTxt, 'b', 'г')
-    resultTxt = letter_dechiper(resultTxt, '<', 'ч')
-    resultTxt = letter_dechiper(resultTxt, '7', 'й')
-    resultTxt = letter_dechiper(resultTxt, 'c', 'д')
-    resultTxt = letter_dechiper(resultTxt, 'Е', 'с')
-    resultTxt = letter_dechiper(resultTxt, 'О', 'е')
-    resultTxt = letter_dechiper(resultTxt, '>', 'и')
-    resultTxt = letter_dechiper(resultTxt, 'А', 'ь')
-    resultTxt = letter_dechiper(resultTxt, '2', 'п')
-    resultTxt = letter_dechiper(resultTxt, 'Д', 'р')
-    resultTxt = letter_dechiper(resultTxt, 'К', 'ю')
-    resultTxt = letter_dechiper(resultTxt, 'Ы', 'ш')
-    resultTxt = letter_dechiper(resultTxt, 'Ф', 'м')
-    resultTxt = letter_dechiper(resultTxt, 'a', 'в')
-    resultTxt = letter_dechiper(resultTxt, '5', 'б')
-    resultTxt = letter_dechiper(resultTxt, 'Л', 'я')
-    resultTxt = letter_dechiper(resultTxt, 't', 'у')
-    resultTxt = letter_dechiper(resultTxt, 'Ь', 'щ')
-    resultTxt = letter_dechiper(resultTxt, 'Р', 'з')
-    resultTxt = letter_dechiper(resultTxt, 'П', 'ж')
-    resultTxt = letter_dechiper(resultTxt, '8', 'к')
-    resultTxt = letter_dechiper(resultTxt, 'Й', 'х')
-    resultTxt = letter_dechiper(resultTxt, 'И', 'ф')
-    resultTxt = letter_dechiper(resultTxt, 'Б', 'э')
-    resultTxt = letter_dechiper(resultTxt, 'Ч', 'ц')
-    resultTxt = letter_dechiper(resultTxt, '\n', 'ы')
 
-    keyDict = dict(zip("МХ4У1rb<7cЕО>А2ДКЫФa5ЛtЬРП8ЙИБЧ\n", "налотгчйдсеиьпрюшмвбяущзжкхфэцы"))
+    keyDict = dict(zip("МХ4У1rb<7cЕО>А2ДКЫФa5ЛtЬРП8ЙИБЧ\n", " налотгчйдсеиьпрюшмвбяущзжкхфэцы"))
+    resultTxt = dechiper(text, keyDict)
+    
     dict_to_json(key_path, keyDict)
     write_file(decrypted_path, resultTxt)
