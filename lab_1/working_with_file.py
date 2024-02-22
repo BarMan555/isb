@@ -37,8 +37,11 @@ def json_to_dict(path : str) -> dict:
         logging.error(ex)
 
 def dict_to_json(path : str, dict : dict) -> None:
-    with open(path, 'w', encoding='utf-8') as file:
-        json.dump(dict, file)
+    try:
+        with open(path, 'w', encoding='utf-8') as file:
+            json.dump(dict, file)
+    except Exception as ex:
+        logging.error(ex)
 
 
 def write_file(path : str, text : str) -> None:
