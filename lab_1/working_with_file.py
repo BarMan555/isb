@@ -17,7 +17,7 @@ def read_file(path_original : str) -> str:
             text = f.read()
         return text
     except FileNotFoundError as ex:
-        logging.error(ex)
+        logging.error(f"Incorrect path - {ex}")
 
 
 def json_to_dict(path : str) -> dict:
@@ -34,14 +34,14 @@ def json_to_dict(path : str) -> dict:
             key = json.load(f)
         return key
     except Exception as ex:
-        logging.error(ex)
+        logging.error(f"Incorrect path - {ex}")
 
 def dict_to_json(path : str, dict : dict) -> None:
     try:
         with open(path, 'w', encoding='utf-8') as file:
             json.dump(dict, file)
     except Exception as ex:
-        logging.error(ex)
+        logging.error(f"Incorrect dict - {ex}")
 
 
 def write_file(path : str, text : str) -> None:
@@ -59,4 +59,4 @@ def write_file(path : str, text : str) -> None:
         with open(path, 'w', encoding='utf-8') as file:
             file.write(text)
     except Exception as ex:
-        logging.error(ex)
+        logging.error(f"Incorrect path - {ex}")

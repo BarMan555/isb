@@ -5,6 +5,9 @@ from working_with_file import json_to_dict, dict_to_json, read_file, write_file
 SETTING_PATH = "lab_1\\settings2.json"
 RIGHT_ALPHABET = " оиеантсрвмлдякпзыьучжгхфйюбцщэъ"
 
+OLD_SYMBOLS = "МХ4У1rb<7cЕО>А2ДКЫФa5ЛtЬРП8ЙИБЧ\n"
+NEW_SYMBOLS = " налотгчйдсеиьпрюшмвбяущзжкхфэцы"
+
 def make_stats(text : str) -> dict:
     """
     Finds the frequency of occurrence of a letter in a word.
@@ -25,7 +28,7 @@ def make_stats(text : str) -> dict:
     return stats
 
 
-def dechiper(text : str, key : dict) -> str:
+def decryption(text : str, key : dict) -> str:
     """
     Replaces old characters with new ones in the text using a dictionary. 
     Return new text
@@ -38,25 +41,9 @@ def dechiper(text : str, key : dict) -> str:
         Dictionary-key
     """
     for old, new in key.items():
-        text = letter_dechiper(text, old, new)
+        text = text.replace(old, new)
     return text
 
-def letter_dechiper(text : str, old : str, new : str) -> str:
-    """
-    Replace the old character with a new one in the text. 
-    Return new text
-
-    parameters
-    -----------
-    text : str,
-        The text in which the replacement occurs
-    old : str,
-        Old letter
-    New : str, 
-        New letter
-    """
-    text=text.replace(old, new)
-    return text
 
 if __name__ == "__main__":
     setting = json_to_dict(SETTING_PATH)
@@ -88,8 +75,8 @@ if __name__ == "__main__":
     # key = dict(zip(letter_list, RIGHT_ALPHABET))
     # dict_to_json(key_path, key)
 
-    keyDict = dict(zip("МХ4У1rb<7cЕО>А2ДКЫФa5ЛtЬРП8ЙИБЧ\n", " налотгчйдсеиьпрюшмвбяущзжкхфэцы"))
-    resultTxt = dechiper(text, keyDict)
+    keyDict = dict(zip(OLD_SYMBOLS, NEW_SYMBOLS))
+    resultTxt = decryption(text, keyDict)
     
     dict_to_json(key_path, keyDict)
     write_file(decrypted_path, resultTxt)
