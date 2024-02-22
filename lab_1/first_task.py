@@ -19,28 +19,20 @@ def encryption(text : str, key : dict) -> str:
     key : dict,
         Encryption key
     """
-    try:
-        # Создаем таблицу регистров для коректного выходного
-        registerTable = list()
-        for letter in text:
-            if (letter not in RUSSIAN) and (letter not in DIGITAL): continue
-            if letter.isupper():
-                registerTable.append(True)
-            else:
-                registerTable.append(False)
-            
+    try:    
         # Создаем новую строчку с закодированным текстом
-        # учитывая регистор с помощью таблицы регистров
+        # учитывая регистор
         i = 0
         resultText = ""
         for letter in text.upper():
             if (letter not in RUSSIAN) and (letter not in DIGITAL):
                 resultText += letter
+                i += 1
                 continue
 
             resultKey = key[letter]
-            if registerTable[i]: resultText += resultKey
-            else:                resultText += resultKey.lower()
+            if text[i].isupper(): resultText += resultKey
+            else:                 resultText += resultKey.lower()
             i += 1
         
         return resultText
