@@ -1,12 +1,16 @@
+import logging
 import os
 
 from working_with_file import json_to_dict, dict_to_json, read_file, write_file
+
+logging.basicConfig(level=logging.INFO)
 
 SETTING_PATH = "lab_1\\settings2.json"
 RIGHT_ALPHABET = " оиеантсрвмлдякпзыьучжгхфйюбцщэъ"
 
 OLD_SYMBOLS = "МХ4У1rb<7cЕО>А2ДКЫФa5ЛtЬРП8ЙИБЧ\n"
-NEW_SYMBOLS = " налотгчйдсеиьпрюшмвбяущзжкхфэцы"
+NEW_SYMBOLS = " налотгчйдсеиьпрюшмвбяущз"
+
 
 def make_stats(text : str) -> dict:
     """
@@ -18,14 +22,17 @@ def make_stats(text : str) -> dict:
     text : str,
         Text for analysis
     """
-    length = len(text)
-    stats = dict()
-    for letter in text:
-        if letter not in stats:
-            count = text.count(letter)
-            stats[letter] = count / length
-    stats = dict(sorted(stats.items(), key=lambda item:item[1], reverse=True))
-    return stats
+    try:
+        length = len(text)
+        stats = dict()
+        for letter in text:
+            if letter not in stats:
+                count = text.count(letter)
+                stats[letter] = count / length
+        stats = dict(sorted(stats.items(), key=lambda item:item[1], reverse=True))
+        return stats
+    except Exception as ex:
+        logging.error(f"Incorrect path - {ex}")
 
 
 def decryption(text : str, key : dict) -> str:
@@ -40,9 +47,12 @@ def decryption(text : str, key : dict) -> str:
     key : dict,
         Dictionary-key
     """
-    for old, new in key.items():
-        text = text.replace(old, new)
-    return text
+    try:
+        for old, new in key.items():
+            text = text.replace(old, new)
+        return text
+    except Exception as ex:
+        logging.error(f"Incorrect text or dict - {ex}")
 
 
 if __name__ == "__main__":
