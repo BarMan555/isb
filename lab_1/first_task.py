@@ -9,6 +9,7 @@ SETTING_PATH = 'lab_1\settings1.json'
 RUSSIAN = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя"
 DIGITAL = "0123456789"
 
+
 def encryption(text : str, key : dict) -> str:
     """
     Encrypts the received text using the received key. Returns the ciphertext
@@ -38,7 +39,7 @@ def encryption(text : str, key : dict) -> str:
         
         return resultText
     except Exception as ex:
-        logging.error(ex)
+        logging.error(f"Wrong dictionary - {ex}")
 
 
 if __name__ == "__main__":
