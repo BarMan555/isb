@@ -8,9 +8,6 @@ logging.basicConfig(level=logging.INFO)
 SETTING_PATH = "lab_1\\settings2.json"
 RIGHT_ALPHABET = " оиеантсрвмлдякпзыьучжгхфйюбцщэъ"
 
-OLD_SYMBOLS = "МХ4У1rb<7cЕО>А2ДКЫФa5ЛtЬРП8ЙИБЧ\n"
-NEW_SYMBOLS = " налотгчйдсеиьпрюшмвбяущз"
-
 
 def make_stats(text : str) -> dict:
     """
@@ -85,7 +82,7 @@ if __name__ == "__main__":
     # key = dict(zip(letter_list, RIGHT_ALPHABET))
     # dict_to_json(key_path, key)
 
-    keyDict = dict(zip(OLD_SYMBOLS, NEW_SYMBOLS))
+    keyDict = dict(zip(setting['oldSymbols'], setting['newSymbols']))
     resultTxt = decryption(text, keyDict)
     
     dict_to_json(key_path, keyDict)
