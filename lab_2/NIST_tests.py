@@ -1,7 +1,7 @@
 import json
 import os
 import logging
-import math
+from math import fabs, sqrt, erfc
 
 logging.basicConfig(level=logging.INFO)
 
@@ -10,8 +10,8 @@ SEQUENCE_PATH = os.path.join('lab_2', 'sequence.json')
 def frequency_bit_test(sequence : str) -> float:
     i_seq = list(map(int, sequence))
     result_seq = [-1 if x == 0 else x for x in i_seq]
-    result_sum = sum(result_seq) / math.sqrt(len(result_seq))
-    p_value = math.erfc(result_sum / math.sqrt(2))
+    result_sum = fabs(sum(result_seq)) / sqrt(len(result_seq))
+    p_value = erfc(result_sum / sqrt(2))
     return p_value
 
 
@@ -19,16 +19,16 @@ def identical_consecutive_bits(sequence : str) -> float:
     i_seq = list(map(int, sequence))
 
     share_of_units = sum(i_seq) / len(i_seq) 
-    if math.fabs(share_of_units-(1/2)) >= 2/math.sqrt(len(i_seq)):
+    if fabs(share_of_units-(1/2)) >= 2/sqrt(len(i_seq)):
         return 0.0
     
     number_of_sign_changes = 0
     for i in range(0, len(i_seq)-1):
         number_of_sign_changes += 0 if i_seq[i] == i_seq[i+1] else 1
 
-    p_value = math.erfc(
-        math.fabs(number_of_sign_changes-2*len(i_seq)*share_of_units*(1-share_of_units))
-        /(2*math.sqrt(2*len(i_seq))*share_of_units*(1-share_of_units))
+    p_value = erfc(
+        fabs(number_of_sign_changes-2*len(i_seq)*share_of_units*(1-share_of_units))
+        /(2*sqrt(2*len(i_seq))*share_of_units*(1-share_of_units))
         )
     
     return p_value
