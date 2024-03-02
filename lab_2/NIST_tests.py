@@ -1,8 +1,7 @@
 import json
-import os
 import logging
-
-from math import fabs, sqrt, erfc
+import os
+from math import erfc, fabs, sqrt
 from mpmath import gammainc
 
 logging.basicConfig(level=logging.INFO)
@@ -11,6 +10,14 @@ SEQUENCE_PATH = os.path.join('lab_2', 'sequence.json')
 PI_I = {1:0.2148, 2:0.3672, 3:0.2305, 4:0.1875}
 
 def frequency_bit_test(sequence : str) -> float:
+    """
+    Performs a bit frequency test
+
+    Parameters:
+    sequence: str - sequence to be processed
+    
+    Return: float - Probability of a random sequence
+    """
     i_seq = list(map(int, sequence))
     result_seq = [-1 if x == 0 else x for x in i_seq]
     result_sum = fabs(sum(result_seq)) / sqrt(len(result_seq))
@@ -19,6 +26,14 @@ def frequency_bit_test(sequence : str) -> float:
 
 
 def identical_consecutive_bits(sequence : str) -> float:
+    """
+    Performs a test for identical consecutive bits
+
+    Parameters:
+    sequence: str - sequence to be processed
+    
+    Return: float - Probability of a random sequence
+    """
     i_seq = list(map(int, sequence))
 
     share_of_units = sum(i_seq) / len(i_seq) 
@@ -38,6 +53,14 @@ def identical_consecutive_bits(sequence : str) -> float:
 
 
 def longest_sequence_of_ones_in_the_block(sequence : str) -> float:
+    """
+    Performs a Test for the longest sequence of ones in a block
+
+    Parameters:
+    sequence:str - sequence to be processed
+    
+    Return: float - Probability of a random sequence
+    """
     i_seq = list(map(int, sequence))
     block_size = 8
     blocks = [i_seq[i:i + block_size] for i in range(0, len(i_seq), block_size)]
@@ -68,8 +91,6 @@ def longest_sequence_of_ones_in_the_block(sequence : str) -> float:
     return p_value
 
 
-    
-
 if __name__ == "__main__":
     with open(SEQUENCE_PATH, 'r', encoding='utf-8') as f:
         sequence = json.load(f)
@@ -77,6 +98,12 @@ if __name__ == "__main__":
     cpp_seq = sequence['cpp']
     java_seq = sequence['java']
 
+    print("Results for C++ sequence")
     print(frequency_bit_test(cpp_seq))
     print(identical_consecutive_bits(cpp_seq))
+    print(longest_sequence_of_ones_in_the_block(cpp_seq))
+
+    print("Results for Java sequence")
+    print(frequency_bit_test(java_seq))
+    print(identical_consecutive_bits(java_seq))
     print(longest_sequence_of_ones_in_the_block(java_seq))
