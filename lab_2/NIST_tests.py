@@ -8,6 +8,7 @@ from mpmath import gammainc
 logging.basicConfig(level=logging.INFO)
 
 SEQUENCE_PATH = os.path.join('lab_2', 'sequence.json')
+RESULT_PATH = os.path.join('lab_2', 'result.txt')
 PI_I = {1:0.2148, 2:0.3672, 3:0.2305, 4:0.1875}
 
 def frequency_bit_test(sequence : str) -> float:
@@ -108,12 +109,13 @@ if __name__ == "__main__":
     cpp_seq = sequence['cpp']
     java_seq = sequence['java']
 
-    print("Results for C++ sequence")
-    print(frequency_bit_test(cpp_seq))
-    print(identical_consecutive_bits(cpp_seq))
-    print(longest_sequence_of_ones_in_the_block(cpp_seq))
+    with open(RESULT_PATH, 'w', encoding='utf-8') as f:
+        f.write("Results for C++ sequence\n")
+        f.write(str(frequency_bit_test(cpp_seq)) + '\n')
+        f.write(str(identical_consecutive_bits(cpp_seq)) + '\n')
+        f.write(str(longest_sequence_of_ones_in_the_block(cpp_seq)) + '\n')
 
-    print("Results for Java sequence")
-    print(frequency_bit_test(java_seq))
-    print(identical_consecutive_bits(java_seq))
-    print(longest_sequence_of_ones_in_the_block(java_seq))
+        f.write("\nResults for Java sequence\n")
+        f.write(str(frequency_bit_test(java_seq)) + '\n')
+        f.write(str(identical_consecutive_bits(java_seq)) + '\n')
+        f.write(str(longest_sequence_of_ones_in_the_block(java_seq)) + '\n')
