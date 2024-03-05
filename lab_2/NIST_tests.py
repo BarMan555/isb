@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+
 from math import erfc, fabs, sqrt
 from mpmath import gammainc
 
@@ -80,13 +81,13 @@ def longest_sequence_of_ones_in_the_block(sequence : str) -> float:
                 if max_once < max_once_now:
                     max_once = max_once_now
             match max_once:
-                case range(0, 2):
+                case 0 | 1:
                     v_i[1] += 1
                 case 2:
                     v_i[2] += 1
                 case 3:
                     v_i[3] += 1
-                case range(4, 9):
+                case 4 | 5 | 6 | 7 | 8:
                     v_i[4] += 1
                 case _:
                     pass
