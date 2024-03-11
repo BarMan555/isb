@@ -2,14 +2,14 @@ import json
 import logging
 import os
 
-from math import erfc, fabs, sqrt
+from math import erfc, fabs, sqrt, pow
 from mpmath import gammainc
 
 logging.basicConfig(level=logging.INFO)
 
 SEQUENCE_PATH = os.path.join('lab_2', 'sequence.json')
 RESULT_PATH = os.path.join('lab_2', 'result.txt')
-PI_I = {1:0.2148, 2:0.3672, 3:0.2305, 4:0.1875}
+PI_I = {0:0.2148, 1:0.3672, 2:0.2305, 3:0.1875}
 
 def frequency_bit_test(sequence : str) -> float:
     """
@@ -93,8 +93,8 @@ def longest_sequence_of_ones_in_the_block(sequence : str) -> float:
                 case _:
                     pass
         x_square = 0
-        for i, v in v_i.items():
-            x_square += (v-16*PI_I[i])**2 / 16*PI_I[i]
+        for i in range(4):
+            x_square += pow(v_i[i+1]-16*PI_I[i], 2) / (16*PI_I[i])
         
         p_value = gammainc(3/2, x_square/2)
         return p_value
