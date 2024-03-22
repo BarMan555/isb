@@ -17,3 +17,16 @@ def keys_for_asymmetric_algorithm() -> tuple:
     private_key = keys
     public_key = keys.public_key()
     return (public_key, private_key)
+
+
+def serialization_public_key(path : str, key) -> None:
+    with open(path, 'wb') as public_out:
+            public_out.write(key.public_bytes(encoding=serialization.Encoding.PEM,
+                format=serialization.PublicFormat.SubjectPublicKeyInfo))
+            
+
+def serialization_private_key(path : str, key) -> None:
+    with open(path, 'wb') as private_out:
+            private_out.write(key.private_bytes(encoding=serialization.Encoding.PEM,
+                format=serialization.PrivateFormat.TraditionalOpenSSL,
+                encryption_algorithm=serialization.NoEncryption()))
