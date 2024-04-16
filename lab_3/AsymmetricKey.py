@@ -47,3 +47,27 @@ class AsymmetricalKey:
                                                    label=None))
         write_data_bytes(encr_key, path_encr_symmetric)
 
+
+    def decrypt_symm_key(self,
+                         path_encr_symmetric : str,
+                         path_private : str,
+                         path_decr_symmetric : str) -> bytes:
+        """
+        Decrypt symmetric key using a private key
+        
+        Args:
+            path_encr_symmetric: path to the file with encrypted symmetric key
+            path_private: path to the file with private key
+            path_decr_symmetric: path to the file where will be save a encrypted symmetric key
+        Return:
+            bytes: symmetric key
+        """
+        private_key = deserialization_private_key(path_private)
+        encr_symmetric = deserialization_symmetric_key(path_encr_symmetric)
+        
+        symmetric_key = private_key.decrypt(encr_symmetric,
+                                      padding.OAEP(mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                                                   algorithm=hashes.SHA256(),
+                                                   label=None))
+        serialization_symmetric_key(symmetric_key, path_decr_symmetric)
+        return symmetric_key
