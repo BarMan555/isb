@@ -5,7 +5,6 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.serialization import load_pem_public_key, load_pem_private_key
 
 
-
 logging.basicConfig(level=logging.INFO)
 
 
@@ -42,13 +41,13 @@ def read_data_bytes(path : str) -> bytes:
     except Exception as ex:
         logging.error(ex)
 
+
 def serialization_symmetric_key(key : bytes, path : str) -> None:
     try:
         with open(path, 'wb') as key_file:
             key_file.write(key)
     except Exception as ex:
         logging.error(ex)
-
 
 
 def deserialization_symmetric_key(path : str) -> bytes:
