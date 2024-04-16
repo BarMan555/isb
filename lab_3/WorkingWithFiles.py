@@ -13,6 +13,13 @@ def write_data(text : str, path : str) -> None:
         logging.error(ex)
 
 
+def write_data_bytes(data : bytes, path : str) -> None:
+    try: 
+        with open(path, 'wb') as file:
+            file.write(data)
+    except Exception as ex:
+        logging.error(ex)
+
 
 def read_data(path : str) -> str:
     try:
