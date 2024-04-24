@@ -62,9 +62,9 @@ class AsymmetricalKey:
         Return:
             bytes: symmetric key
         """
-        private_key = deserialization_private_key(path_private)
         encr_symmetric = deserialization_symmetric_key(path_encr_symmetric)
-        
+        private_key = deserialization_private_key(path_private)
+
         symmetric_key = private_key.decrypt(encr_symmetric,
                                       padding.OAEP(mgf=padding.MGF1(algorithm=hashes.SHA256()),
                                                    algorithm=hashes.SHA256(),

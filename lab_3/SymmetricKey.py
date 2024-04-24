@@ -34,7 +34,7 @@ class SymmetricKey:
             path_encr_text: path to the enctypted text file
             path_key: path to the symmetric key file
 
-        Result:
+        Return:
             encrypted text in bytes
         """
         text = bytes(read_data(path_text), 'UTF-8')
@@ -62,7 +62,7 @@ class SymmetricKey:
             path_decry_tetx: path to the decrypted text file
             path_key: path to the symmetric key file
 
-        Result:
+        Return:
             decrypted text
         """
         text = read_data_bytes(path_encr_text)

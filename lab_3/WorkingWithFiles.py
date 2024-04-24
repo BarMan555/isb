@@ -78,8 +78,8 @@ def deserialization_public_key(public_pem: str) -> rsa.RSAPublicKey:
         logging.error(ex)
 
 
-def serialization_private_key(private_pem: str,
-                          private_key: rsa.RSAPrivateKey) -> None:
+def serialization_private_key(private_key: rsa.RSAPrivateKey, 
+                              private_pem: str,) -> None:
     try:
         with open(private_pem, 'wb') as private_out:
             private_out.write(private_key.private_bytes(encoding=serialization.Encoding.PEM,
