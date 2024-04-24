@@ -9,6 +9,13 @@ logging.basicConfig(level=logging.INFO)
 
 
 def write_data(text : str, path : str) -> None:
+    """
+    Write Data in file
+    -------
+    Args:
+        text: data for writing
+        path: the path to the file
+    """
     try:
         with open(path, 'w', encoding='utf-8') as file:
             file.write(text)
@@ -17,6 +24,13 @@ def write_data(text : str, path : str) -> None:
 
 
 def write_data_bytes(data : bytes, path : str) -> None:
+    """
+    Write Data in file in bytes
+    -------
+    Args:
+        data: bytes of info
+        path: the path to the file
+    """
     try: 
         with open(path, 'wb') as file:
             file.write(data)
@@ -25,6 +39,14 @@ def write_data_bytes(data : bytes, path : str) -> None:
 
 
 def read_data(path : str) -> str:
+    """
+    Read data from the file
+    -------
+    Args:
+        path: the path to the file
+    Return:
+        str: data in the file
+    """
     try:
         with open(path, 'r', encoding='utf-8') as file:
             data = file.read()
@@ -34,6 +56,14 @@ def read_data(path : str) -> str:
 
 
 def read_data_bytes(path : str) -> bytes:
+    """
+    Read data from the file in bytes
+    -------
+    Args:
+        path: the path to the file
+    Return:
+        bytes: data in the file
+    """
     try:
         with open(path, 'rb') as file:
             data = file.read()
@@ -43,6 +73,13 @@ def read_data_bytes(path : str) -> bytes:
 
 
 def serialization_symmetric_key(key : bytes, path : str) -> None:
+    """
+    Serialization symmetric key in file
+    ------
+    Args:
+        key: symmetric key
+        path: path to serialization
+    """
     try:
         with open(path, 'wb') as key_file:
             key_file.write(key)
@@ -51,6 +88,14 @@ def serialization_symmetric_key(key : bytes, path : str) -> None:
 
 
 def deserialization_symmetric_key(path : str) -> bytes:
+    """
+    Deserialization symmetric key from file
+    ------
+    Args:
+        path: path to deserialization
+    Return:
+        bytes: deserialization key
+    """
     try:
         with open(path, mode='rb') as key_file: 
             content = key_file.read()
@@ -61,6 +106,13 @@ def deserialization_symmetric_key(path : str) -> bytes:
 
 def serialization_public_key(public_key : rsa.RSAPublicKey, 
                              public_pem : str) -> None:
+    """
+    Serialization public key in file
+    ------
+    Args:
+        public key: public key
+        public_pem: path to serialization
+    """
     try:
         with open(public_pem, 'wb') as public_out:
             public_out.write(public_key.public_bytes(encoding=serialization.Encoding.PEM,
@@ -70,6 +122,14 @@ def serialization_public_key(public_key : rsa.RSAPublicKey,
 
 
 def deserialization_public_key(public_pem: str) -> rsa.RSAPublicKey:
+    """
+    Deserialization public key from file
+    ------
+    Args:
+        public_pem: path to deserialization
+    Return:
+        rsa.RSAPublicKey: deserialization key
+    """
     try:
         with open(public_pem, 'rb') as pem_in:
             public_bytes = pem_in.read()
@@ -80,6 +140,13 @@ def deserialization_public_key(public_pem: str) -> rsa.RSAPublicKey:
 
 def serialization_private_key(private_key: rsa.RSAPrivateKey, 
                               private_pem: str,) -> None:
+    """
+    Serialization private key in file
+    ------
+    Args:
+        private key: private key
+        private_pem: path to serialization
+    """
     try:
         with open(private_pem, 'wb') as private_out:
             private_out.write(private_key.private_bytes(encoding=serialization.Encoding.PEM,
@@ -90,6 +157,14 @@ def serialization_private_key(private_key: rsa.RSAPrivateKey,
 
 
 def deserialization_private_key(private_pem: str) -> rsa.RSAPrivateKey:
+    """
+    Deserialization private key from file
+    ------
+    Args:
+        private_pem: path to deserialization
+    Return:
+        rsa.RSAPrivateKey: deserialization key
+    """
     try:
         with open(private_pem, 'rb') as pem_in:
             private_bytes = pem_in.read()
