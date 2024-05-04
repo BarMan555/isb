@@ -1,5 +1,5 @@
-import json
 import argparse
+import json
 
 from functions_for_card import number_search, luna_algorithm, analysis_time_search_hash_collision
 
@@ -12,7 +12,7 @@ if __name__ == "__main__":
                              '2 - Замерить время для поиска коллизии хеша при различном числе процессов') 
     group = parser.add_argument_group('Аргументы на выбор')
     group.add_argument('--info', required=False, help='Информация о карте и ёё хэш')
-    group.add_argument('--numbers', required=False, help="Номер карты")
+    group.add_argument('--number', required=False, help="Номер карты")
     args = parser.parse_args()
 
     if args.info:
@@ -24,8 +24,8 @@ if __name__ == "__main__":
              number_search("card_number.json", settings["hash"], settings["last_digits"], settings["bins"])
         case 1: 
             if luna_algorithm(args.numbers):
-                print("Numbers is correct")
+                print("Number is correct")
             else:
-                print("Numbers is incorrect")
+                print("Number is incorrect")
         case 2:
             analysis_time_search_hash_collision(settings["hash"], settings["last_digits"], settings["bins"])
